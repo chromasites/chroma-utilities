@@ -2,7 +2,7 @@
 Contributors: nkruska
 Requires at least: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPL-2.0-or-later
 
 Utility functions and standardizations for Chroma Sites managed WordPress websites.
@@ -21,6 +21,9 @@ Bundled Plugin Update Checker retrieves published stable releases from https://g
 4. Enable auto-updates for Chroma Utilities if desired.
 
 == Changelog ==
+
+= 2.0.1 =
+* Comment-only wording change to test update delivery from version 2.0.
 
 = 2.0 =
 * Added GitHub release updates with bundled Plugin Update Checker 5.7.

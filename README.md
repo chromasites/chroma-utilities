@@ -2,7 +2,7 @@
 
 Miscellaneous utility functions and standardizations for Chroma Sites managed WordPress websites.
 
-Current version: **2.0**
+Current version: **2.0.1**
 
 Requires WordPress 5.8 or newer and PHP 5.6.20 or newer.
 

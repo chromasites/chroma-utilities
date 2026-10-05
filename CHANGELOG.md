@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1 — 2026-10-05
+
+- Made a comment-only wording change to test delivery of updates from version 2.0.
+- Checked Plugin Update Checker; bundled version 5.7 is still the latest stable release, so no library upgrade was needed.
+
 ## 2.0 — 2026-10-05
 
 - Added bundled Plugin Update Checker 5.7, connected to `chromasites/chroma-utilities`.

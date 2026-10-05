@@ -3,7 +3,7 @@
  * Plugin Name: Chroma Utilities
  * Plugin URI: https://chromasites.com
  * Description: Miscellaneous utility functions and standardizations for Chroma Sites managed websites.
- * Version: 2.0
+ * Version: 2.0.1
  * Requires at least: 5.8
  * Requires PHP: 5.6.20
  * Author: Chroma Sites
@@ -92,7 +92,7 @@ add_filter( 'hello_elementor_viewport_content', function () {
 } );
 
 /**
- * Prefill the lost-password form from the email query parameter.
+ * Prefill the lost-password form from the URL's email query parameter.
  *
  * Link to the site's lost-password page with a URL-encoded email address:
  * https://yoursite.com/wp-login.php?action=lostpassword&email=person%40example.com

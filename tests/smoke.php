@@ -120,7 +120,10 @@ foreach ( $hooks['site_transient_update_plugins'][10] as $item ) {
 	}
 }
 check( $checker !== null, 'Real update checker must initialize.' );
-check( $checker->getInstalledVersion() === '2.0', 'Installed version must be 2.0.' );
+$stable_tag = get_file_data( dirname( __DIR__ ) . '/readme.txt', array( 'Version' => 'Stable tag' ) );
+$installed_version = $checker->getInstalledVersion();
+check( $installed_version === $stable_tag['Version'], 'Installed version must match the readme stable tag.' );
+$newer_version = $installed_version . '.1';
 check( $checker->getVcsApi()->getRepositoryUrl() === 'https://github.com/chromasites/chroma-utilities', 'Updater repository must match the moved repository.' );
 check( $scheduled['puc_cron_check_updates-chroma-utilities'] === 'twicedaily', 'Updater must schedule periodic checks.' );
 $plugin_key = 'chroma-utilities/chroma-utilities.php';
@@ -129,27 +132,27 @@ check( isset( $updates->no_update[$plugin_key] ), 'Auto-update controls must be 
 $cached_update = new \YahnisElsts\PluginUpdateChecker\v5p7\Plugin\Update();
 $cached_update->slug = 'chroma-utilities';
 $cached_update->filename = $plugin_key;
-$cached_update->version = '2.1';
+$cached_update->version = $newer_version;
 $cached_update->download_url = 'https://example.com/chroma-utilities.zip';
 $checker->getUpdateState()->setUpdate( $cached_update );
 $updates = $checker->injectUpdate( null );
-check( $updates->response[$plugin_key]->new_version === '2.1', 'Newer releases must reach WordPress update data.' );
+check( $updates->response[$plugin_key]->new_version === $newer_version, 'Newer releases must reach WordPress update data.' );
 check( $updates->response[$plugin_key]->package === $cached_update->download_url, 'WordPress must receive the installable ZIP URL.' );
 check( $updates->response[$plugin_key]->autoupdate === false, 'Updater must not force automatic installation.' );
-$cached_update->version = '2.0';
+$cached_update->version = $installed_version;
 check( $checker->getUpdate() === null, 'Same-version releases must not be offered as updates.' );
 $cached_update->version = '1.1';
 check( $checker->getUpdate() === null, 'Older releases must not be offered as downgrades.' );
 $checker->getUpdateState()->setUpdate( null );
 
 $release = array(
-	'tag_name' => 'v2.1', 'draft' => false, 'prerelease' => false,
+	'tag_name' => 'v' . $newer_version, 'draft' => false, 'prerelease' => false,
 	'zipball_url' => 'https://example.com/source.zip', 'created_at' => '2026-10-05T00:00:00Z',
 	'assets' => array( array( 'name' => 'chroma-utilities.zip', 'browser_download_url' => 'https://example.com/chroma-utilities.zip', 'download_count' => 1 ) ),
 );
 mock_release( $release );
 $reference = $checker->getVcsApi()->chooseReference( 'main' );
-check( $reference && $reference->version === '2.1', 'Stable release must be detected.' );
+check( $reference && $reference->version === $newer_version, 'Stable release must be detected.' );
 check( $reference->downloadUrl === 'https://example.com/chroma-utilities.zip', 'Updater must use the installable asset.' );
 check( count( $http_requests ) === 1, 'Only the latest-release endpoint should be requested.' );
 foreach ( array( 'draft', 'prerelease', 'missing_asset', 'wrong_asset' ) as $case ) {

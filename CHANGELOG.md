@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0 — 2026-10-05
+
+- Added bundled Plugin Update Checker 5.7, connected to `chromasites/chroma-utilities`.
+- Limited updates to published stable GitHub releases containing `chroma-utilities.zip`.
+- Added the Update URI header to identify the plugin's external update source.
+- Added a four-week Public Post Preview nonce lifetime.
+- Set Gravity Forms notification senders from valid Postmark settings, supporting JSON and legacy array settings.
+- Enabled Gravity Forms scrolling to validation errors and confirmations.
+- Added the requested Hello Elementor viewport content.
+- Registered integrations directly without theme-duplicate checks; equivalent theme snippets should be removed during migration.
+- Documented installation, automatic updates, and release packaging.
+
 ## 1.1 — 2026-10-05
 
 - Added lost-password email field prefilling from the URL's `email` query parameter.

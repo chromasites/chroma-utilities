@@ -1,0 +1,9 @@
+# Chroma Utilities maintenance
+
+Whenever updating this plugin, check the most recent stable release of [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker/releases/latest) and update the bundled library if appropriate.
+
+- Compare the latest stable release with the version bundled in `lib/plugin-update-checker/`.
+- Review upstream release notes, PHP and WordPress compatibility, and API changes before deciding whether to upgrade.
+- When upgrading, preserve upstream licenses and include all required runtime dependencies. Update version-specific class references, documentation, and compatibility requirements as needed.
+- Run PHP syntax checks and `php tests/smoke.php`. Verify stable-release selection, required ZIP assets, and WordPress update data after any updater change.
+- Record an updater upgrade in `CHANGELOG.md`. If retaining the bundled version, explain the compatibility or other concrete reason in the change summary.

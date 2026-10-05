@@ -38,16 +38,17 @@ Version 1.1 has no updater; install 2.0 manually once on any existing 1.1 site t
 
 ## Releasing an update
 
-1. Update the version in `chroma-utilities.php`, `readme.txt`, this README, and `CHANGELOG.md`.
-2. Run PHP syntax checks and `php tests/smoke.php`, then commit the release changes.
-3. Create and push a matching tag, such as `v2.1`.
-4. Build the installable ZIP from the tag, from the repository root:
+1. Check the [latest stable Plugin Update Checker release](https://github.com/YahnisElsts/plugin-update-checker/releases/latest) and update the bundled library if appropriate. Review release notes and compatibility, update version-specific references and documentation, and record any upgrade in the changelog. If retaining the existing version, explain why in the change summary.
+2. Update the version in `chroma-utilities.php`, `readme.txt`, this README, and `CHANGELOG.md`.
+3. Run PHP syntax checks and `php tests/smoke.php`, then commit the release changes.
+4. Create and push a matching tag, such as `v2.1`.
+5. Build the installable ZIP from the tag, from the repository root:
 
    ```sh
    git archive --format=zip --prefix=chroma-utilities/ --output=../chroma-utilities.zip v2.1
    ```
 
-5. Publish a GitHub release for that tag and attach `chroma-utilities.zip`. For example:
+6. Publish a GitHub release for that tag and attach `chroma-utilities.zip`. For example:
 
    ```sh
    gh release create v2.1 ../chroma-utilities.zip --repo chromasites/chroma-utilities --verify-tag --title "Chroma Utilities 2.1" --notes-file /path/to/release-notes.md

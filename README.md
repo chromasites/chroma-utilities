@@ -47,6 +47,8 @@ Version 1.1 has no updater; install 2.0 manually once on any existing 1.1 site t
    ```sh
    git archive --format=zip --prefix=chroma-utilities/ --output=../chroma-utilities.zip v2.1
    cp ../chroma-utilities.zip ../chroma-utilities-2.1.zip
+   mkdir -p ../archive
+   cp -n ../chroma-utilities-2.1.zip ../archive/chroma-utilities-2.1.zip
    ```
 
 6. Publish a GitHub release for that tag and attach both ZIPs. The versioned ZIP is for manual downloads; `chroma-utilities.zip` is required by the updater. For example:
@@ -56,6 +58,8 @@ Version 1.1 has no updater; install 2.0 manually once on any existing 1.1 site t
    ```
 
 Keep the tag, PHP plugin version, readme stable tag, and ZIP contents consistent. Mark test releases as prereleases. The updater library and its runtime dependencies must remain in every ZIP.
+
+The local `../archive/` folder stores versioned ZIPs for previous releases. Archive each release when it is built, preserve older versions when updating the current downloads, and never replace an archived published version with different contents. Archive files are outside the repository and are not included in plugin packages.
 
 ## Lost-password links
 

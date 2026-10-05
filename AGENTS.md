@@ -7,3 +7,4 @@ Whenever updating this plugin, check the most recent stable release of [Plugin U
 - When upgrading, preserve upstream licenses and include all required runtime dependencies. Update version-specific class references, documentation, and compatibility requirements as needed.
 - Run PHP syntax checks and `php tests/smoke.php`. Verify stable-release selection, required ZIP assets, and WordPress update data after any updater change.
 - Record an updater upgrade in `CHANGELOG.md`. If retaining the bundled version, explain the compatibility or other concrete reason in the change summary.
+- Provide a versioned download named `chroma-utilities-VERSION.zip` for each release, alongside the identical `chroma-utilities.zip` asset required by the updater. Keep the internal plugin folder named `chroma-utilities`.

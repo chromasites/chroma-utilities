@@ -3,7 +3,7 @@
  * Plugin Name: Chroma Utilities
  * Plugin URI: https://chromasites.com
  * Description: Miscellaneous utility functions and standardizations for Chroma Sites managed websites.
- * Version: 2.0.1
+ * Version: 2.2
  * Requires at least: 5.8
  * Requires PHP: 5.6.20
  * Author: Chroma Sites
@@ -17,11 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/includes/site-redirect.php';
+
 /**
  * Check for published GitHub releases using the bundled updater.
  * Each release must include an installable asset named chroma-utilities.zip.
  * Drafts, prereleases, standalone tags, and branch commits are not updates.
- * Automatic installation follows the site's WordPress auto-update setting.
+ * Automatic installation is enabled below for this plugin only.
  */
 add_action( 'plugins_loaded', function () {
 	require_once __DIR__ . '/lib/plugin-update-checker/plugin-update-checker.php';
@@ -40,6 +42,19 @@ add_action( 'plugins_loaded', function () {
 		return array_intersect_key( $strategies, array( 'latest_release' => true ) );
 	} );
 } );
+
+/**
+ * Opt this plugin into WordPress's automatic updater on every domain.
+ * WordPress also uses this filter to show that auto-updates are enabled.
+ * Preserve WordPress's per-update safety flag and other plugins' preferences.
+ */
+add_filter( 'auto_update_plugin', function ( $update, $item ) {
+	if ( isset( $item->plugin ) && plugin_basename( __FILE__ ) === $item->plugin
+		&& empty( $item->disable_autoupdate ) ) {
+		return true;
+	}
+	return $update;
+}, 10, 2 );
 
 /**
  * Disable WordPress automatic update notification emails.

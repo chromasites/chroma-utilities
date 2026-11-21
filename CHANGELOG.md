@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.2 — 2026-11-20
+
+- Enabled WordPress automatic updates for Chroma Utilities on every domain while the plugin is active, without requiring a per-site opt-in.
+- Preserved other plugins' preferences, WordPress's global updater restrictions, and per-update safety flags. Updates still require a published stable GitHub release with `chroma-utilities.zip`.
+- Checked the latest stable Plugin Update Checker release (6.0). Retained bundled 5.7 to preserve PHP 5.6.20 compatibility; 6.0 requires PHP 7.4, and this change needs no new updater APIs.
+
+## 2.1 — 2026-11-20
+
+- Merged Simple Site Redirect into Utilities with Settings > Site Redirect on `.chroma.site` subdomains only.
+- Restricted redirects to the configured Site Address's `.chroma.site` hostname, disabling them on live custom domains and custom-domain aliases.
+- Preserved the existing destination option, temporary (302) behavior, and admin/login access; added request-time destination validation to prevent loops after domain changes.
+- Documented deactivating the standalone redirect plugin when migrating.
+- Reviewed Plugin Update Checker 6.0. Retained bundled 5.7 to preserve the plugin's PHP 5.6.20 minimum: 6.0 requires PHP 7.4. The release also updates Parsedown for developer-supplied release notes and makes escaping/metadata fixes; no updater API changes are needed for this feature.
+
 ## 2.0.1 — 2026-10-05
 
 - Made a comment-only wording change to test delivery of updates from version 2.0.

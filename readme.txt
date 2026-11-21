@@ -2,7 +2,7 @@
 Contributors: nkruska
 Requires at least: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.0.1
+Stable tag: 2.2
 License: GPL-2.0-or-later
 
 Utility functions and standardizations for Chroma Sites managed WordPress websites.
@@ -11,16 +11,26 @@ Utility functions and standardizations for Chroma Sites managed WordPress websit
 
 Chroma Utilities suppresses automatic update notification emails, prefills lost-password email fields, and provides optional Public Post Preview, Gravity Forms, Postmark, and Hello Elementor integrations.
 
-Bundled Plugin Update Checker retrieves published stable releases from https://github.com/chromasites/chroma-utilities. Enable auto-updates for this plugin in WordPress if automatic installation is desired.
+Optional site redirects are available under Settings > Site Redirect only on .chroma.site subdomains. Redirects turn off automatically on custom domains. Deactivate the standalone Simple Site Redirect plugin when upgrading; its saved destination is reused.
+
+Bundled Plugin Update Checker retrieves published stable releases from https://github.com/chromasites/chroma-utilities. While active, Chroma Utilities enables its own WordPress auto-updates automatically on every domain. WordPress's global restrictions and per-update safety checks still apply.
 
 == Installation ==
 
 1. Upload chroma-utilities.zip through Plugins > Add New > Upload Plugin.
 2. Remove equivalent theme snippets if migrating an existing site.
 3. Activate Chroma Utilities.
-4. Enable auto-updates for Chroma Utilities if desired.
+4. Auto-updates for Chroma Utilities are enabled automatically while it is active.
 
 == Changelog ==
+
+= 2.2 =
+* Enabled automatic installation of stable GitHub releases for Chroma Utilities without a per-site opt-in.
+* Preserved other plugins' auto-update preferences and WordPress safety checks.
+
+= 2.1 =
+* Merged Simple Site Redirect with automatic domain restrictions to .chroma.site subdomains.
+* Reused existing redirect destinations and preserved admin/login access.
 
 = 2.0.1 =
 * Comment-only wording change to test update delivery from version 2.0.

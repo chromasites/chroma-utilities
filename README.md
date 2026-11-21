@@ -2,7 +2,7 @@
 
 Miscellaneous utility functions and standardizations for Chroma Sites managed WordPress websites.
 
-Current version: **2.2**
+Current version: **2.2.1**
 
 Requires WordPress 5.8 or newer and PHP 5.6.20 or newer.
 
@@ -15,7 +15,7 @@ Requires WordPress 5.8 or newer and PHP 5.6.20 or newer.
 - Enables Gravity Forms scrolling to validation errors and confirmations.
 - Sets Hello Elementor's viewport to `width=device-width, initial-scale=1.0, maximum-scale=1.0`.
 - Adds optional site redirects exclusively on `.chroma.site` subdomains, with settings under **Settings > Site Redirect**.
-- Automatically installs published stable GitHub releases using WordPress and bundled Plugin Update Checker 5.7.
+- Checks published stable GitHub releases using bundled Plugin Update Checker 5.7, with automatic installation controlled by WordPress's normal toggle.
 
 ## Installation
 
@@ -29,7 +29,7 @@ The Public Post Preview, Gravity Forms, Postmark, and Hello Elementor integratio
 
 Updates come from [chromasites/chroma-utilities](https://github.com/chromasites/chroma-utilities). No GitHub token or separate updater plugin is required while the repository is public.
 
-While Chroma Utilities is active, auto-updates are enabled automatically for this plugin on every domain. No per-site toggle is needed. The Plugins screen shows that auto-updates are enabled, and WordPress installs eligible releases through its normal background updater. Other plugins' auto-update preferences are preserved. WordPress's global automatic-update restrictions, filesystem permissions, compatibility checks, and per-update safety flags still apply.
+Use **Plugins > Installed Plugins > Chroma Utilities > Enable auto-updates** or **Disable auto-updates** to choose whether WordPress installs eligible releases automatically. Chroma Utilities preserves WordPress's normal default and saved preference; it does not force auto-updates or opt itself in. WordPress's global automatic-update restrictions, filesystem permissions, compatibility checks, and per-update safety flags still apply.
 
 The default scheduled check runs about every 12 hours, subject to WordPress cron. The Plugins screen also provides a **Check for updates** link. Automatic update notification emails remain disabled by this plugin.
 
@@ -37,32 +37,32 @@ Only published, non-prerelease GitHub releases with an asset named exactly `chro
 
 Version 1.1 has no updater; install 2.0 manually once on any existing 1.1 site that should receive future releases.
 
-Install version 2.2 or newer once to enable this automatic-installation policy. Earlier versions still require their existing WordPress auto-update opt-in to receive it automatically. New code must be published as a GitHub release with the required ZIP before installed sites can receive it; local edits alone do not create an update.
+Version 2.2 forced auto-updates while active. Version 2.2.1 restores the normal toggle without changing the saved preference. New code must be published as a GitHub release with the required ZIP before installed sites can receive it; local edits alone do not create an update.
 
 ## Releasing an update
 
 1. Check the [latest stable Plugin Update Checker release](https://github.com/YahnisElsts/plugin-update-checker/releases/latest) and update the bundled library if appropriate. Review release notes and compatibility, update version-specific references and documentation, and record any upgrade in the changelog. If retaining the existing version, explain why in the change summary.
 2. Update the version in `chroma-utilities.php`, `readme.txt`, this README, and `CHANGELOG.md`.
 3. Run PHP syntax checks, `php tests/smoke.php`, and `php tests/redirect.php` (also with `rest`, `cli`, and `success` arguments), then commit the release changes.
-4. Create and push a matching tag, such as `v2.2`.
+4. Create and push a matching tag, such as `v2.2.1`.
 5. Build the installable ZIP from the tag, from the repository root:
 
    ```sh
-   git archive --format=zip --prefix=chroma-utilities/ --output=../chroma-utilities-2.2.zip v2.2
+   git archive --format=zip --prefix=chroma-utilities/ --output=../chroma-utilities-2.2.1.zip v2.2.1
    mkdir -p ../archive
-   if [ -e ../archive/chroma-utilities-2.2.zip ]; then
-     cmp ../chroma-utilities-2.2.zip ../archive/chroma-utilities-2.2.zip
+   if [ -e ../archive/chroma-utilities-2.2.1.zip ]; then
+     cmp ../chroma-utilities-2.2.1.zip ../archive/chroma-utilities-2.2.1.zip
    else
-     cp ../chroma-utilities-2.2.zip ../archive/chroma-utilities-2.2.zip
+     cp ../chroma-utilities-2.2.1.zip ../archive/chroma-utilities-2.2.1.zip
    fi
    ```
 
-6. Publish a GitHub release for that tag and attach both ZIPs. The versioned ZIP is for manual downloads; `chroma-utilities.zip` is required by the updater. Create the unversioned asset in a temporary folder for publishing:
+6. Publish a GitHub release for that tag with only `chroma-utilities.zip` attached, as required by the updater. Keep the versioned ZIP local. Create the unversioned asset in a temporary folder for publishing:
 
    ```sh
    release_assets_dir="$(mktemp -d)"
-   cp ../chroma-utilities-2.2.zip "$release_assets_dir/chroma-utilities.zip"
-   gh release create v2.2 "$release_assets_dir/chroma-utilities.zip" ../chroma-utilities-2.2.zip --repo chromasites/chroma-utilities --verify-tag --title "Chroma Utilities 2.2" --notes-file /path/to/release-notes.md
+   cp ../chroma-utilities-2.2.1.zip "$release_assets_dir/chroma-utilities.zip"
+   gh release create v2.2.1 "$release_assets_dir/chroma-utilities.zip" --repo chromasites/chroma-utilities --verify-tag --title "Chroma Utilities 2.2.1" --notes-file /path/to/release-notes.md
    ```
 
 Keep the tag, PHP plugin version, readme stable tag, and ZIP contents consistent. Mark test releases as prereleases. The updater library and its runtime dependencies must remain in every ZIP.

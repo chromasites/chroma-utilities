@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.1 — 2026-11-20
+
+- Removed forced auto-updates and restored WordPress's normal toggle and defaults without changing saved preferences.
+- Kept stable GitHub release detection and the required `chroma-utilities.zip` asset.
+- Checked Plugin Update Checker 6.0; retained bundled 5.7 to preserve PHP 5.6.20 compatibility because 6.0 requires PHP 7.4. No updater library changes were needed.
+
 ## 2.2 — 2026-11-20
 
 - Enabled WordPress automatic updates for Chroma Utilities on every domain while the plugin is active, without requiring a per-site opt-in.

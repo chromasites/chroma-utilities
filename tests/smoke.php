@@ -138,10 +138,10 @@ $checker->getUpdateState()->setUpdate( $cached_update );
 $updates = $checker->injectUpdate( null );
 check( $updates->response[$plugin_key]->new_version === $newer_version, 'Newer releases must reach WordPress update data.' );
 check( $updates->response[$plugin_key]->package === $cached_update->download_url, 'WordPress must receive the installable ZIP URL.' );
-check( $updates->response[$plugin_key]->autoupdate === false, 'Repository metadata must remain separate from the local auto-update policy.' );
+check( $updates->response[$plugin_key]->autoupdate === false, 'Repository metadata must not force automatic installation.' );
 foreach ( array( false, true, null ) as $preference ) {
-	check( apply_filters( 'auto_update_plugin', $preference, $updates->response[$plugin_key] ) === true, 'Chroma Utilities must auto-update without a per-site opt-in.' );
-	check( apply_filters( 'auto_update_plugin', $preference, (object) array( 'plugin' => $plugin_key ) ) === true, 'Plugins screen must detect auto-updates as enabled even without an update offer.' );
+	check( apply_filters( 'auto_update_plugin', $preference, $updates->response[$plugin_key] ) === $preference, 'Chroma Utilities must preserve the normal WordPress auto-update preference.' );
+	check( apply_filters( 'auto_update_plugin', $preference, (object) array( 'plugin' => $plugin_key ) ) === $preference, 'Plugins screen must retain the normal toggle instead of detecting forced auto-updates.' );
 	foreach ( array( 'other/other.php', 'other/chroma-utilities.php', 'chroma-utilities-copy/chroma-utilities.php' ) as $other_plugin ) {
 		check( apply_filters( 'auto_update_plugin', $preference, (object) array( 'plugin' => $other_plugin ) ) === $preference, 'Other plugins must retain their exact auto-update preference.' );
 	}
@@ -198,4 +198,4 @@ foreach ( array( 'auto_core_update_send_email', 'auto_plugin_update_send_email',
 	check( apply_filters( $hook, true ) === false, 'Update emails must remain disabled.' );
 }
 function __return_false() { return false; }
-echo "Passed: updater initialization, release selection, WordPress update data, automatic installation policy/safety, asset requirements, Postmark fallbacks, and utility filters.\n";
+echo "Passed: updater initialization, release selection, WordPress update data, normal auto-update preferences/safety, asset requirements, Postmark fallbacks, and utility filters.\n";

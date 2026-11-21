@@ -2,7 +2,7 @@
 Contributors: nkruska
 Requires at least: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.2
+Stable tag: 2.2.1
 License: GPL-2.0-or-later
 
 Utility functions and standardizations for Chroma Sites managed WordPress websites.
@@ -13,16 +13,19 @@ Chroma Utilities suppresses automatic update notification emails, prefills lost-
 
 Optional site redirects are available under Settings > Site Redirect only on .chroma.site subdomains. Redirects turn off automatically on custom domains. Deactivate the standalone Simple Site Redirect plugin when upgrading; its saved destination is reused.
 
-Bundled Plugin Update Checker retrieves published stable releases from https://github.com/chromasites/chroma-utilities. While active, Chroma Utilities enables its own WordPress auto-updates automatically on every domain. WordPress's global restrictions and per-update safety checks still apply.
+Bundled Plugin Update Checker retrieves published stable releases from https://github.com/chromasites/chroma-utilities. WordPress's normal auto-update toggle, default, and saved preference control automatic installation. Auto-updates are not forced or automatically enabled.
 
 == Installation ==
 
 1. Upload chroma-utilities.zip through Plugins > Add New > Upload Plugin.
 2. Remove equivalent theme snippets if migrating an existing site.
 3. Activate Chroma Utilities.
-4. Auto-updates for Chroma Utilities are enabled automatically while it is active.
+4. Use the normal Enable auto-updates or Disable auto-updates toggle in WordPress as desired.
 
 == Changelog ==
+
+= 2.2.1 =
+* Restored WordPress's normal auto-update toggle, default, and saved preference; removed forced auto-updates.
 
 = 2.2 =
 * Enabled automatic installation of stable GitHub releases for Chroma Utilities without a per-site opt-in.
